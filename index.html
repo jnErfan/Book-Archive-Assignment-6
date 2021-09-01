@@ -17,6 +17,9 @@
     <!-- Vanilla Css Style Sheet  -->
     <link rel="stylesheet" href="CSS/style.css">
 
+    <!-- Animate  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="Images/fav icon.png" type="image/x-icon">
 
@@ -32,12 +35,61 @@
 
     <!-- Header Start  -->
     <header>
-        <h1 class="text-white">Hello. IM Erfan</h1>
+        <!-- Search Button And Input Fild  -->
+        <div class="bg-white p-3 rounded-3 my-5">
+            <div class="input-group">
+                <input id="search-Input" class="form-control" type="text" placeholder="Search Books">
+                <button onclick="searchButton()" type="button" class="btn btn-primary ms-1"><i
+                        class="fas fa-search"></i></button>
+            </div>
+        </div>
     </header>
     <!-- Header End -->
 
     <!-- Main Start  -->
     <main>
+        <!-- Error Massage  How Many Book Found And Spinner -->
+        <section>
+
+            <!-- Loding Spinner  -->
+            <div id="spinner" class="text-center d-none">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow text-secondary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow text-danger" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow text-warning" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow text-info" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow text-dark" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <!-- Found Length Of Books  -->
+            <div id="bookFound">
+            </div>
+            <div id="error-Massage" class="bg-white text-danger rounded-3  text-center ">
+            </div>
+        </section>
+        <!-- Add Books Card Reapiting Item -->
+        <section>
+            <div id="books-library" class="row row-cols-1 row-cols-md-3 g-4">
+
+                <!-- Reapiting Card  -->
+
+            </div>
+        </section>
 
     </main>
     <!-- Main End  -->
