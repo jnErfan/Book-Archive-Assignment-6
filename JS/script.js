@@ -1,25 +1,33 @@
-// Java Script Start \\
+//  Java Script Start \\
+
+// Repeating Variables
 const spinner = document.getElementById('spinner');
 const booksContainer = document.getElementById('books-library');
 const resultFound = document.getElementById('bookFound');
 const errorMassage = document.getElementById('error-Massage');
 
+// Button Handler 
 const searchButton = () => {
     const searchFild = document.getElementById('search-Input');
     const searchTextInput = searchFild.value;
 
+    // Clear Html Texts 
     spinner.classList.remove('d-none');
     booksContainer.textContent = '';
     resultFound.textContent = '';
     errorMassage.textContent = '';
-    if (searchTextInput == '') {
+
+    // Empty String Error Handling
+    if (searchTextInput === '') {
         spinner.classList.add('d-none');
         errorMassage.innerHTML = `
         <h3 class="p-2 fw-bolder  animate__animated animate__flash animate__repeat-2">Please Write Something</h3>
         `;
+
+        // Api Data Call 
     } else {
         // Api Link 
-        const url = `http://openlibrary.org/search.json?q=${searchTextInput}`;
+        const url = `https://openlibrary.org/search.json?q=${searchTextInput}`;
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -32,30 +40,38 @@ const searchButton = () => {
     searchFild.value = '';
 }
 
+// Append In UI 
 const booksDetails = books => {
 
+    // How Many Books Found
     booksContainer.textContent = '';
-    resultFound.innerHTML = ` <h3 class="bg-white text-success p-2 text-center fw-bolder rounded-3  animate__animated animate__flash animate__repeat-2">${books.length} Books Found</h3>`
+    resultFound.innerHTML = ` <h3 class="bg-white text-success p-2 text-center fw-bolder rounded-3  animate__animated animate__flash animate__repeat-2">${books.length} Books Found</h3>`;
+    console.log(books.length)
 
+    // Book Not Found Error Massage \\
     if (books <= 0) {
         resultFound.innerHTML = '';
-        errorMassage.innerHTML = `<h3 class="p-2 fw-bolder  animate__animated animate__flash animate__repeat-2">Please Enter Valid Book Name</h3>`;
+        errorMassage.innerHTML = `<h3 class="p-2 fw-bolder  animate__animated animate__flash">The Book Could Not Found</h3>`;
     }
+
+    // All Books Informations 
     else {
-        // All Books Details
+
         books.forEach(book => {
+            const img1 = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
+            const img2 = `https://images.unsplash.com/photo-1508919801845-fc2ae1bc2a28?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aW1nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80`;
             const div = document.createElement('div');
             div.innerHTML = `
         <div class="col">
             <div class="card">
-            <img  height="250px"  src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg">
+            <img  height="250px" src="${img1 ? img1 : img2}" alt="It Have No Pictures">
                 <div class="card-body">
                     <h5 class="card-title"><span class="text-primary">Book Name: </span> ${book.title}</h5>
                     <p class="card-text"><span class="text-success fw-bold">Authors: </span> 
-                    ${book.author_name ? book.author_name : 'The Authors Name Was Not Given'}</p>
+                    ${book?.author_name ? book?.author_name[0] : 'The Authors Name Was Not Given'}</p>
                     <p class="card-text"><span class="text-success fw-bold">Book Publisher: </span>
-                     ${book.publisher ? book.publisher : 'No Publisher'}</p>
-                    <p class="card-text"><span class="text-success fw-bold">First Publish Year: </span>
+                     ${book?.publisher ? book?.publisher[0] : 'No Publisher'}</p>
+                     <p class="card-text"><span class="text-success fw-bold">First Publish Year: </span>
                      ${book.first_publish_year ? book.first_publish_year : 'No Date Specified'}</p>
                 </div>
             </div>
@@ -65,6 +81,6 @@ const booksDetails = books => {
 
         })
     }
-
-
 }
+
+// Java Script End \\
