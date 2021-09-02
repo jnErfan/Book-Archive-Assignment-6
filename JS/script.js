@@ -45,26 +45,26 @@ const booksDetails = books => {
 
     // How Many Books Found
     booksContainer.textContent = '';
-    resultFound.innerHTML = ` <h3 class="bg-white text-success p-2 text-center fw-bolder rounded-3  animate__animated animate__flash animate__repeat-2">${books.length} Books Found</h3>`;
+    resultFound.innerHTML = ` <h3 class="bg-white text-success p-2 mb-4 text-center fw-bolder rounded-3  animate__animated animate__flash">${books.length} Books Found</h3>`;
     console.log(books.length)
 
     // Book Not Found Error Massage \\
     if (books <= 0) {
         resultFound.innerHTML = '';
-        errorMassage.innerHTML = `<h3 class="p-2 fw-bolder  animate__animated animate__flash">The Book Could Not Found</h3>`;
+        errorMassage.innerHTML = `<h3 class="p-2 fw-bolder  animate__animated animate__flash animate__repeat-2">The Book Could Not Found</h3>`;
     }
 
-    // All Books Informations 
+    // All Books Informations \\
     else {
-
         books.forEach(book => {
-            const img1 = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
-            const img2 = `https://images.unsplash.com/photo-1508919801845-fc2ae1bc2a28?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aW1nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80`;
+            // All Image Url 
+            const bookImage = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
+            const defaultImage = 'Images/default img.jpg'
             const div = document.createElement('div');
             div.innerHTML = `
         <div class="col">
-            <div class="card">
-            <img  height="250px" src="${img1 ? img1 : img2}" alt="It Have No Pictures">
+            <div class="card card-Item">
+            <img  height="250px" src="${book.cover_i === undefined ? defaultImage : bookImage}" alt="It Have No Pictures">
                 <div class="card-body">
                     <h5 class="card-title"><span class="text-primary">Book Name: </span> ${book.title}</h5>
                     <p class="card-text"><span class="text-success fw-bold">Authors: </span> 
@@ -82,5 +82,4 @@ const booksDetails = books => {
         })
     }
 }
-
 // Java Script End \\
